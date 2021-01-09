@@ -5,7 +5,7 @@ let inputImage;
 let clearButton;
 
 function setup() {
-  canvas = createCanvas(1200, 600);
+  canvas = createCanvas(800, 600);
   pixelDensity(1);
   let options = {
     task: 'imageClassification',
@@ -33,7 +33,7 @@ function modelLoaded() {
 }
 
 function classifyImage() {
-  inputImage.copy(canvas, 0, 0, 1200, 1200, 0, 0, 64, 64);
+  inputImage.copy(canvas, 0, 0, 800, 800, 0, 0, 64, 64);
   shapeClassifier.classify(
     {
       image: inputImage,
@@ -47,7 +47,7 @@ function gotResults(err, results) {
     console.error(err);
     return;
   }
-  let label = results[0].label, results[2].label, results[3].label;
+  let label = results[0].label;
   let confidence = nf(100 * results[0].confidence, 2,1);
   console.log(results[1].confidence)
   resultsDiv.html(`${label} ${confidence}%`);
@@ -62,9 +62,5 @@ function draw() {
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
 
-  // stroke(0);
-  // noFill();
-  // strokeWeight(4);
-  // rectMode(CENTER);
-  // rect(width/2, height/2, 40);
+
 }
