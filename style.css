@@ -1,0 +1,15 @@
+body {
+  background-color: grey;
+  font-size: 30px
+}
+
+
+canvas {
+  border:5px solid #000000;
+}
+button {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  background-color: orange;
+}
