@@ -1,1 +1,2 @@
-# Syntaxd.github.io
+This is a shape classifier
+https://syntaxd.github.io/
