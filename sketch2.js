@@ -1,12 +1,3 @@
-// Shape Classifier (Mouse)
-// Coding Challenge
-// The Coding Train / Daniel Shiffman
-// https://thecodingtrain.com/CodingChallenges/158-shape-classifier.html
-// https://youtu.be/3MqJzMvHE3E
-
-// Mouse: https://editor.p5js.org/codingtrain/sketches/JgLVfCS4E
-// Webcam: https://editor.p5js.org/codingtrain/sketches/2hZGBkqqq
-
 let shapeClassifier;
 let canvas;
 let resultsDiv;
