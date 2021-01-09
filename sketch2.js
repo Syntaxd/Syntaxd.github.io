@@ -3,7 +3,6 @@ let canvas;
 let resultsDiv;
 let inputImage;
 let clearButton;
-
 function setup() {
   canvas = createCanvas(800, 600);
   pixelDensity(1);
