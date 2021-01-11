@@ -4,7 +4,7 @@ let resultsDiv;
 let inputImage;
 let clearButton;
 function setup() {
-  canvas = createCanvas(800, 650);
+  canvas = createCanvas(625, 625);
   pixelDensity(1);
   let options = {
     task: 'imageClassification',
@@ -32,7 +32,7 @@ function modelLoaded() {
 }
 
 function classifyImage() {
-  inputImage.copy(canvas, 0, 0, 800, 800, 0, 0, 64, 64);
+  inputImage.copy(canvas, 0, 0, 625, 625, 0, 0, 64, 64);
   shapeClassifier.classify(
     {
       image: inputImage,
