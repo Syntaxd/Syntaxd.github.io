@@ -4,7 +4,7 @@ let resultsDiv;
 let inputImage;
 let clearButton;
 function setup() {
-  canvas = createCanvas(800, 600);
+  canvas = createCanvas(800, 650);
   pixelDensity(1);
   let options = {
     task: 'imageClassification',
