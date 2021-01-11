@@ -1,5 +1,5 @@
 body {
-  background-color: grey;
+  background-color: #2b2b2b;
   font-size: 30px
 }
 
@@ -10,6 +10,8 @@ canvas {
 button {
   padding-top: 5px;
   padding-bottom: 5px;
+  padding-right: 72vw;
   margin-top: 10px;
+  padding-left: 25vw;
   background-color: orange;
 }
