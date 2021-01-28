@@ -7,6 +7,8 @@ var CanW = 1000;
 context.canvas.height = CanH;
 context.canvas.width = CanW;
 
+var gameWidth = 2000;
+
 const numTrails = 6;
 
 function pointInBox (x, y, box) {
@@ -61,7 +63,8 @@ player = {
   x:100, // center of the canvas
   x_velocity:0,
   y:250,
-  y_velocity:0
+  y_velocity:0,
+  x_cam:100
 };
 
 prevPlayer = {
@@ -96,25 +99,27 @@ controller = {
   }
 };
 
-function randomRange(s, b) {
-  // console.log('Range From: ' + s + ' to ' + b)
-   var Rand1 = Math.floor(Math.random() * CanW - 1)
-   var MathR = (Math.random() * 1)
-      if (MathR > 1) {Rand2 = Rand1 - 100}
-      if (MathR < 1) {Rand2 = Rand1 + 100}
-        if (Rand2 < 0) {Rand1 += 100;  Rand2 = Rand2 + 100}
-        if (Rand2 > 1000) {Rand1 -= 100; Rand2 = Rand2 - 100}
-        // console.log(Rand1 + ' ' + Rand2)
-    return [Rand1, Rand2]
-}
+// function randomRange(s, b) {
+//   // console.log('Range From: ' + s + ' to ' + b)
+//
+//    var Rand1 = Math.floor(Math.random() * gameWidth - 1)
+//    var MathR = (Math.random() * 1)
+//       if (MathR > 1) {Rand2 = Rand1 - 100}
+//       if (MathR < 1) {Rand2 = Rand1 + 100}
+//         if (Rand2 < 0) {Rand1 += 100;  Rand2 = Rand2 + 100}
+//         if (Rand2 > gameWidth) {Rand1 -= 100; Rand2 = Rand2 - 100}
+//         // console.log(Rand1 + ' ' + Rand2)
+//     return [Rand1, Rand2]
+// }
 
 function randomNumber(s, b) {
   return Math.floor(Math.random() * (b - s) + 1) + s
 }
 
-function generatePlatform(y, canvasWidth) {
+function generatePlatform(y, gameWidth) {
   const gapWidth = 100;
-  let x = Math.random()*(canvasWidth - 3*gapWidth)+ gapWidth;
+  let x = Math.random()*(gameWidth - 3*gapWidth)+ gapWidth;
+  console.log(x+gapWidth, x+gapWidth + gameWidth - (x+gapWidth))
   return [
     {
     x: 0,
@@ -125,7 +130,7 @@ function generatePlatform(y, canvasWidth) {
   {
     x: x+gapWidth,
     y: y,
-    width: canvasWidth - (x+gapWidth),
+    width: gameWidth - (x+gapWidth),
     height: 5,
   }
   ]
@@ -140,11 +145,11 @@ gameMap = {blocks: [
     height: 50,},
 ]}
 
-gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(500, CanW))
-gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(400, CanW))
-gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(300, CanW))
-gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(200, CanW))
-gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(100, CanW))
+gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(500, gameWidth))
+gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(400, gameWidth))
+gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(300, gameWidth))
+gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(200, gameWidth))
+gameMap.blocks.push.apply(gameMap.blocks, generatePlatform(100, gameWidth))
 console.log(gameMap.blocks)
 
 const debug1 = [];
@@ -213,8 +218,10 @@ loop = function() {
     player.y_velocity = 0;
   }
 
-  if (player.x < 0) {player.x = 0}  //Prevents from going left
-  else if (player.x > (context.canvas.width - player.width)) {player.x = context.canvas.width - player.width} //Prevents from going right
+  if (player.x < 0) {
+    //Prevents from going left
+    player.x = 0
+  } else if (player.x > (gameWidth - player.width)) {player.x = gameWidth - player.width} //Prevents from going right
 
 
   // console.log('draw', player.y)
@@ -230,20 +237,20 @@ loop = function() {
     context.beginPath()
     context.strokeStyle = '#fff'
     context.lineWidth = '1';
-    context.rect(rect.x + offset, rect.y + offset, rect.width - 2.*offset, rect.height - 2.*offset)
+    context.rect(rect.x + offset + player.x_cam, rect.y + offset, rect.width - 2.*offset, rect.height - 2.*offset)
     context.stroke();
   }
 
   context.fillStyle = "#ff0000";// hex for red
-  context.fillRect(player.x, player.y, player.width, player.height); // Red box
+  context.fillRect(player.x + player.x_cam, player.y, player.width, player.height); // Red box
   context.fillStyle = "black"
-  context.fillRect(player.x+8 + player.x_velocity/2,  player.y+5, 2, 2)
-  context.fillRect(player.x+4 + player.x_velocity/2,  player.y+5, 2, 2)
+  context.fillRect(player.x+8 + player.x_velocity/2 + player.x_cam,  player.y+5, 2, 2)
+  context.fillRect(player.x+4 + player.x_velocity/2 + player.x_cam,  player.y+5, 2, 2)
 
   for (let x = 0; x < gameMap.blocks.length; x++) {
     context.fillStyle = 'lime'
     rect = gameMap.blocks[x];
-    context.fillRect(rect.x, rect.y, rect.width, rect.height)
+    context.fillRect(rect.x + player.x_cam, rect.y, rect.width, rect.height)
   }
 
 
