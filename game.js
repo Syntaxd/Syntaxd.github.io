@@ -64,7 +64,7 @@ player = {
   x_velocity:0,
   y:250,
   y_velocity:0,
-  x_cam:100
+  x_cam:0
 };
 
 prevPlayer = {
@@ -173,7 +173,12 @@ loop = function() {
   player.y_velocity += 0.85 // up gravity (fall speed?)
   player.y_velocity *= 0.97;// friction (jump force?)
   player.y += player.y_velocity;
-  player.x += player.x_velocity;
+  if (player.x > 500) {
+    player.x_cam -= player.x_velocity
+  }
+    player.x += player.x_velocity;
+  
+
   // physics
 
   // console.log(player.y)
