@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: black;
+}
+
+p {
+    margin: 10px;
+    color: white;
+    font-size: 50px;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    border: 5px unset white;
+}

@@ -17,15 +17,18 @@ const moduleFactory = function ()
             }
         },
         {
-            get: function (target, prop)
+            get: function (tar, prop)
             {
-                if (!(prop == "exports"))
+                if (prop == "exports")
                 {
                     return "private data >:)";
                 }
-                return target[prop]();
-            },
-            set: function (){}
+                return Reflect.get(...arguments);
+            }
         }
     );
 }
+window.module = moduleFactory();
+window.addEventListener("DOMContentLoaded", function () {
+  delete window["module"];
+});
