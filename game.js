@@ -173,11 +173,14 @@ loop = function() {
   player.y_velocity += 0.85 // up gravity (fall speed?)
   player.y_velocity *= 0.97;// friction (jump force?)
   player.y += player.y_velocity;
-  if (player.x > 500) {
+  if (player.x > 500 && controller.right) {
     player.x_cam -= player.x_velocity
   }
+  if (player.x < 300 && controller.left) {
+    player.x_cam -= player.x_velocity;
+  }
     player.x += player.x_velocity;
-  
+
 
   // physics
 
