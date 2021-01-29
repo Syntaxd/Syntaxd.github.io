@@ -9,7 +9,5 @@ body {
 }
 
 canvas {
-    display: block;
-    margin: auto;
     border: 5px ridge slateblue;
 }
