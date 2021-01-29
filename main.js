@@ -1,3 +1,5 @@
+//THIS FILE IS TO BE STRIPPED OF IT'S FUNCITONS TO BE ORGANIZED INTO MODULES
+
 var context, controller, player, loop;
 var myScore;
 
