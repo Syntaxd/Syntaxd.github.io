@@ -82,6 +82,7 @@ controller = {
   left:false,
   right:false,
   up:false,
+  down:false,
 
   keyListener:function(event) {
     var key_state = (event.type == "keydown")?true:false;
@@ -95,6 +96,9 @@ controller = {
       break;
       case 68:// right key
         controller.right = key_state;
+      break;
+      case 83:// right key
+        controller.down = key_state;
       break;
     }
   }
@@ -160,10 +164,14 @@ const debug3 = [];
 var timeIndex  = 0;
 loop = function() {
 
-  if (controller.up && player.jumping == false) {
-    player.y_velocity -= 20;
-    player.jumping = true;}
-
+  if (controller.up /*&& player.jumping == false*/) {
+    player.y_velocity -= 0.85 // up gravity (fall speed?)
+  //   player.y_velocity -= 20;
+  //   player.jumping = true;
+}
+if (controller.down) {
+  player.y_velocity += 0.85
+}
 
   if (!player.jumping || player.y_velocity > -4) {
     if (controller.left) {player.x_velocity -= 0.5;}
@@ -171,8 +179,8 @@ loop = function() {
   player.x_velocity *= 0.9}; // friction
 
 
-  player.y_velocity += 0.85 // up gravity (fall speed?)
-  player.y_velocity *= 0.97;// friction (jump force?)
+  // player.y_velocity += 0.85 // up gravity (fall speed?)
+  player.y_velocity *= 0.9;// friction (jump force?)
   player.y += player.y_velocity;
   player.x += player.x_velocity;
 
